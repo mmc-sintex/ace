@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+    <title>Shadow Clash</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="app">
+
+    <!-- CHARACTER SELECT -->
+
+    <section id="characterSelect">
+
+        <div class="selectTitle">
+            <div class="smallTitle">SHADOW CLASH</div>
+            <h1>انتخاب مبارز</h1>
+        </div>
+
+        <div id="fighters"></div>
+
+        <div class="difficultyBox">
+            <span>درجه ربات</span>
+
+            <input
+                id="difficulty"
+                type="range"
+                min="1"
+                max="10"
+                value="5">
+
+            <strong id="difficultyValue">5</strong>
+        </div>
+
+        <button id="startButton">
+            شروع مبارزه
+        </button>
+
+    </section>
+
+
+    <!-- GAME -->
+
+    <section id="gameScreen" class="hidden">
+
+        <canvas id="gameCanvas"></canvas>
+
+        <div id="hud">
+
+            <div class="fighterHUD playerHUD">
+
+                <div class="hudName" id="playerName">
+                    ARKEN
+                </div>
+
+                <div class="bar">
+                    <div id="playerHP"></div>
+                </div>
+
+            </div>
+
+
+            <div id="timer">
+                60
+            </div>
+
+
+            <div class="fighterHUD enemyHUD">
+
+                <div class="hudName" id="enemyName">
+                    VORK
+                </div>
+
+                <div class="bar">
+                    <div id="enemyHP"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div id="combo">
+            <b id="comboNumber">0</b>
+            <span>HIT COMBO</span>
+        </div>
+
+
+        <!-- MOBILE CONTROLS -->
+
+        <div id="mobileControls">
+
+            <div id="joystick">
+                <div id="stick"></div>
+            </div>
+
+            <div id="actionPad">
+
+                <button class="attackButton punch"
+                        data-action="punch">
+                    P
+                </button>
+
+                <button class="attackButton kick"
+                        data-action="kick">
+                    K
+                </button>
+
+                <button class="attackButton jump"
+                        data-action="jump">
+                    ↑
+                </button>
+
+                <button class="attackButton block"
+                        data-action="block">
+                    D
+                </button>
+
+                <button class="attackButton special"
+                        data-action="special">
+                    ✦
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div id="gameMessage"></div>
+
+    </section>
+
+</div>
+
+<script src="game.js"></script>
+
+</body>
+</html>
