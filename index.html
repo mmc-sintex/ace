@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <title>Pixel Fighters 3D</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div id="app">
+
+    <!-- ================= MENU ================= -->
+
+    <main id="menu">
+
+        <div class="menu-background"></div>
+
+        <section class="menu-card">
+
+            <div class="logo">
+
+                <span>PIXEL</span>
+                <strong>FIGHTERS</strong>
+                <small>3D</small>
+
+            </div>
+
+
+            <!-- GAME MODE -->
+
+            <div class="setting-group">
+
+                <h3>تعداد بازیکن</h3>
+
+                <div class="option-row">
+
+                    <button
+                        class="option active"
+                        data-mode="1"
+                    >
+                        👤 یک نفره
+                    </button>
+
+                    <button
+                        class="option"
+                        data-mode="2"
+                    >
+                        👥 دو نفره
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- DIFFICULTY -->
+
+            <div
+                id="difficultyGroup"
+                class="setting-group"
+            >
+
+                <h3>
+                    درجه سختی بات:
+                    <span id="difficultyNumber">
+                        50
+                    </span>
+                </h3>
+
+                <input
+                    id="difficulty"
+                    type="range"
+                    min="1"
+                    max="100"
+                    value="50"
+                >
+
+                <div class="difficulty-labels">
+
+                    <span>آسان</span>
+                    <span>سخت</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTROL -->
+
+            <div class="setting-group">
+
+                <h3>کنترل بازیکن ۱</h3>
+
+                <div class="option-row">
+
+                    <button
+                        class="control-option active"
+                        data-control="keyboard"
+                    >
+                        ⌨️ کیبورد
+                    </button>
+
+                    <button
+                        class="control-option"
+                        data-control="gamepad"
+                    >
+                        🎮 کنترلر
+                    </button>
+
+                    <button
+                        class="control-option"
+                        data-control="touch"
+                    >
+                        📱 لمسی
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- PLAYER 2 -->
+
+            <div
+                id="player2ControlGroup"
+                class="setting-group hidden"
+            >
+
+                <h3>کنترل بازیکن ۲</h3>
+
+                <div class="option-row">
+
+                    <button
+                        class="control2-option active"
+                        data-control="keyboard"
+                    >
+                        ⌨️ کیبورد
+                    </button>
+
+                    <button
+                        class="control2-option"
+                        data-control="gamepad"
+                    >
+                        🎮 کنترلر
+                    </button>
+
+                    <button
+                        class="control2-option"
+                        data-control="touch"
+                    >
+                        📱 لمسی
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="hudButton"
+                class="secondary-button"
+            >
+                ⚙ تنظیمات HUD
+            </button>
+
+
+            <button
+                id="startButton"
+                class="start-button"
+            >
+                شروع مبارزه
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= GAME ================= -->
+
+    <main
+        id="gameScreen"
+        class="hidden"
+    >
+
+        <canvas id="gameCanvas"></canvas>
+
+
+        <!-- ================= FIGHT HUD ================= -->
+
+        <div id="fightHUD">
+
+            <div class="fighter-status player-one">
+
+                <div class="fighter-name">
+                    PLAYER 1
+                </div>
+
+                <div class="health-container">
+
+                    <div
+                        id="health1"
+                        class="health"
+                    ></div>
+
+                </div>
+
+                <div
+                    id="combo1"
+                    class="combo"
+                ></div>
+
+            </div>
+
+
+            <div id="roundTimer">
+                99
+            </div>
+
+
+            <div class="fighter-status player-two">
+
+                <div class="fighter-name">
+                    PLAYER 2
+                </div>
+
+                <div class="health-container">
+
+                    <div
+                        id="health2"
+                        class="health"
+                    ></div>
+
+                </div>
+
+                <div
+                    id="combo2"
+                    class="combo"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= FIGHT MESSAGE ================= -->
+
+        <div id="fightMessage"></div>
+
+
+        <!-- ================= MOBILE HUD ================= -->
+
+        <div
+            id="touchHUD"
+            class="hidden"
+        >
+
+            <div
+                class="touch-button"
+                data-action="left"
+            >
+                ◀
+            </div>
+
+            <div
+                class="touch-button"
+                data-action="right"
+            >
+                ▶
+            </div>
+
+            <div
+                class="touch-button attack"
+                data-action="punch"
+            >
+                👊
+            </div>
+
+            <div
+                class="touch-button attack"
+                data-action="kick"
+            >
+                🦵
+            </div>
+
+            <div
+                class="touch-button jump"
+                data-action="jump"
+            >
+                ▲
+            </div>
+
+            <div
+                class="touch-button block"
+                data-action="block"
+            >
+                🛡
+            </div>
+
+        </div>
+
+
+        <!-- ================= PAUSE ================= -->
+
+        <button
+            id="pauseButton"
+            class="pause-button"
+        >
+            II
+        </button>
+
+    </main>
+
+
+    <!-- ================= HUD EDITOR ================= -->
+
+    <div
+        id="hudEditor"
+        class="modal hidden"
+    >
+
+        <div class="modal-card">
+
+            <h2>تنظیمات HUD</h2>
+
+            <p>
+                دکمه‌ها را می‌توانی روی صفحه جابه‌جا کنی.
+            </p>
+
+
+            <div class="hud-size-row">
+
+                <label>
+                    اندازه دکمه‌ها
+                </label>
+
+                <input
+                    id="hudSize"
+                    type="range"
+                    min="45"
+                    max="100"
+                    value="64"
+                >
+
+                <span id="hudSizeValue">
+                    64
+                </span>
+
+            </div>
+
+
+            <div class="layout-buttons">
+
+                <button data-layout="classic">
+                    کلاسیک
+                </button>
+
+                <button data-layout="wide">
+                    عریض
+                </button>
+
+                <button data-layout="compact">
+                    جمع‌وجور
+                </button>
+
+            </div>
+
+
+            <button
+                id="hudEditMode"
+                class="primary-button"
+            >
+                ✋ جابه‌جایی دستی
+            </button>
+
+
+            <button
+                id="hudReset"
+                class="danger-button"
+            >
+                ↻ بازگردانی
+            </button>
+
+
+            <button
+                id="hudClose"
+                class="secondary-button"
+            >
+                بستن
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- THREE.JS -->
+
+<script type="importmap">
+
+{
+    "imports": {
+        "three":
+        "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"
+    }
+}
+
+</script>
+
+
+<script
+    type="module"
+    src="app.js"
+></script>
+
+</body>
+</html>
