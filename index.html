@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Pixel Fighters</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="app">
+
+    <!-- ================= MENU ================= -->
+
+    <section id="menu" class="screen">
+
+        <div class="title">
+            <div>PIXEL</div>
+            <div>FIGHTERS</div>
+        </div>
+
+        <div class="pixel-box">
+
+            <h2>تعداد بازیکن</h2>
+
+            <div class="choice-row">
+                <button class="choice active" data-mode="1">
+                    👤 یک نفره
+                </button>
+
+                <button class="choice" data-mode="2">
+                    👥 دو نفره
+                </button>
+            </div>
+
+            <div id="difficultyBox">
+
+                <h2>درجه سختی بات</h2>
+
+                <div class="difficulty-line">
+
+                    <input
+                        id="difficulty"
+                        type="range"
+                        min="1"
+                        max="100"
+                        value="50"
+                    >
+
+                    <span id="difficultyValue">50</span>
+
+                </div>
+
+                <div class="difficulty-text">
+                    سرعت و دقت بات با افزایش سطح بیشتر می‌شود.
+                </div>
+
+            </div>
+
+            <h2>کنترل بازیکن ۱</h2>
+
+            <div class="choice-row">
+                <button class="control-choice active" data-control="keyboard">
+                    ⌨️ کیبورد
+                </button>
+
+                <button class="control-choice" data-control="gamepad">
+                    🎮 کنترلر
+                </button>
+
+                <button class="control-choice" data-control="touch">
+                    📱 لمسی
+                </button>
+            </div>
+
+            <div id="player2Controls" class="hidden">
+
+                <h2>کنترل بازیکن ۲</h2>
+
+                <div class="choice-row">
+
+                    <button class="control2-choice active"
+                            data-control2="keyboard">
+                        ⌨️ کیبورد
+                    </button>
+
+                    <button class="control2-choice"
+                            data-control2="gamepad">
+                        🎮 کنترلر
+                    </button>
+
+                    <button class="control2-choice"
+                            data-control2="touch">
+                        📱 لمسی
+                    </button>
+
+                </div>
+
+            </div>
+
+            <button id="startButton" class="start-button">
+                شروع مبارزه
+            </button>
+
+        </div>
+
+        <div class="footer">
+            PIXEL FIGHTERS
+        </div>
+
+    </section>
+
+
+    <!-- ================= FIGHT ================= -->
+
+    <section id="fight" class="screen hidden">
+
+        <div id="game">
+
+            <!-- BACKGROUND -->
+
+            <div class="sky"></div>
+
+            <div class="mountains"></div>
+
+            <div class="ground">
+
+                <div class="ground-line"></div>
+
+            </div>
+
+
+            <!-- UI -->
+
+            <div class="fight-ui">
+
+                <div class="player-ui">
+
+                    <div class="name">
+                        PLAYER 1
+                    </div>
+
+                    <div class="health-frame">
+
+                        <div id="health1"
+                             class="health-bar">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="timer">
+                    <span id="timer">99</span>
+                </div>
+
+
+                <div class="player-ui player2-ui">
+
+                    <div class="name">
+                        PLAYER 2
+                    </div>
+
+                    <div class="health-frame">
+
+                        <div id="health2"
+                             class="health-bar">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FIGHTERS -->
+
+            <div id="fighter1"
+                 class="fighter fighter1">
+
+                <div class="head"></div>
+                <div class="body"></div>
+
+                <div class="arm arm-back"></div>
+                <div class="arm arm-front"></div>
+
+                <div class="leg leg-back"></div>
+                <div class="leg leg-front"></div>
+
+            </div>
+
+
+            <div id="fighter2"
+                 class="fighter fighter2">
+
+                <div class="head"></div>
+                <div class="body"></div>
+
+                <div class="arm arm-back"></div>
+                <div class="arm arm-front"></div>
+
+                <div class="leg leg-back"></div>
+                <div class="leg leg-front"></div>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div id="fightMessage"
+                 class="fight-message">
+                FIGHT!
+            </div>
+
+
+            <!-- MOBILE CONTROLS -->
+
+            <div id="touchControls"
+                 class="touch-controls hidden">
+
+                <div class="movement-buttons">
+
+                    <button data-key="left">◀</button>
+                    <button data-key="right">▶</button>
+
+                </div>
+
+                <div class="attack-buttons">
+
+                    <button data-key="punch">
+                        P
+                    </button>
+
+                    <button data-key="kick">
+                        K
+                    </button>
+
+                    <button data-key="jump">
+                        ▲
+                    </button>
+
+                    <button data-key="block">
+                        B
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+                      </html>
