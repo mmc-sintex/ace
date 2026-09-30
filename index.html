@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Pixel Fighters 3D</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"
+        }
+    }
+    </script>
+</head>
+
+<body>
+
+<div id="game"></div>
+
+<!-- ================= MENU ================= -->
+
+<div id="menu" class="screen">
+
+    <div class="menu-box">
+
+        <div class="logo">
+            <div class="logo-small">3D ARCADE</div>
+            <h1>PIXEL FIGHTERS</h1>
+        </div>
+
+        <div class="menu-section">
+
+            <h2>تعداد بازیکن</h2>
+
+            <div class="choice-row">
+                <button class="choice active" data-players="1">
+                    👤 ۱ بازیکن
+                </button>
+
+                <button class="choice" data-players="2">
+                    👥 ۲ بازیکن
+                </button>
+            </div>
+
+        </div>
+
+        <div class="menu-section">
+
+            <h2>کنترل</h2>
+
+            <div class="choice-row">
+
+                <button class="choice active" data-control="auto">
+                    خودکار
+                </button>
+
+                <button class="choice" data-control="keyboard">
+                    ⌨️ کیبورد
+                </button>
+
+                <button class="choice" data-control="touch">
+                    📱 لمسی
+                </button>
+
+                <button class="choice" data-control="gamepad">
+                    🎮 دسته
+                </button>
+
+            </div>
+
+        </div>
+
+        <div id="difficultyBox" class="menu-section">
+
+            <h2>
+                سختی هوش مصنوعی:
+                <span id="difficultyValue">50</span>
+            </h2>
+
+            <input
+                id="difficulty"
+                type="range"
+                min="1"
+                max="100"
+                value="50"
+            >
+
+            <div class="range-labels">
+                <span>آسان</span>
+                <span>سخت</span>
+            </div>
+
+        </div>
+
+        <button id="startButton" class="start-button">
+            شروع مبارزه
+        </button>
+
+        <button id="settingsFromMenu" class="settings-button">
+            ⚙️ تنظیمات HUD
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= HUD ================= -->
+
+<div id="hud">
+
+    <div class="health-panel p1-panel">
+
+        <div class="fighter-name">
+            PLAYER 1
+        </div>
+
+        <div class="health-bar">
+            <div id="hp1" class="health-fill"></div>
+        </div>
+
+    </div>
+
+
+    <div class="center-hud">
+
+        <div id="roundText">
+            FIGHT
+        </div>
+
+        <div id="combo1" class="combo">
+        </div>
+
+    </div>
+
+
+    <div class="health-panel p2-panel">
+
+        <div class="fighter-name">
+            PLAYER 2
+        </div>
+
+        <div class="health-bar">
+            <div id="hp2" class="health-fill"></div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= GAME BUTTONS ================= -->
+
+<div id="gameButtons">
+
+    <button id="settingsButton">
+        ⚙️
+    </button>
+
+    <button id="restartButton">
+        ↻
+    </button>
+
+</div>
+
+
+<!-- ================= MOBILE CONTROLS ================= -->
+
+<div id="mobileControls">
+
+    <!-- PLAYER 1 -->
+
+    <div id="controlsP1" class="player-controls p1-controls">
+
+        <div class="move-pad">
+
+            <button data-player="1" data-action="left">
+                ◀
+            </button>
+
+            <button data-player="1" data-action="jump">
+                ▲
+            </button>
+
+            <button data-player="1" data-action="right">
+                ▶
+            </button>
+
+        </div>
+
+        <div class="action-pad">
+
+            <button data-player="1" data-action="punch">
+                👊
+            </button>
+
+            <button data-player="1" data-action="kick">
+                🦵
+            </button>
+
+            <button data-player="1" data-action="block">
+                🛡
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- PLAYER 2 -->
+
+    <div id="controlsP2" class="player-controls p2-controls">
+
+        <div class="move-pad">
+
+            <button data-player="2" data-action="left">
+                ◀
+            </button>
+
+            <button data-player="2" data-action="jump">
+                ▲
+            </button>
+
+            <button data-player="2" data-action="right">
+                ▶
+            </button>
+
+        </div>
+
+        <div class="action-pad">
+
+            <button data-player="2" data-action="punch">
+                👊
+            </button>
+
+            <button data-player="2" data-action="kick">
+                🦵
+            </button>
+
+            <button data-player="2" data-action="block">
+                🛡
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= SETTINGS ================= -->
+
+<div id="settingsPanel" class="modal hidden">
+
+    <div class="settings-box">
+
+        <h2>⚙️ تنظیمات HUD</h2>
+
+        <label>
+            اندازه HUD
+            <span id="hudScaleValue">100%</span>
+        </label>
+
+        <input
+            id="hudScale"
+            type="range"
+            min="70"
+            max="150"
+            value="100"
+        >
+
+
+        <label>
+            شفافیت HUD
+            <span id="hudOpacityValue">100%</span>
+        </label>
+
+        <input
+            id="hudOpacity"
+            type="range"
+            min="30"
+            max="100"
+            value="100"
+        >
+
+
+        <label>
+            جای HUD
+        </label>
+
+        <div class="layout-buttons">
+
+            <button data-layout="top">
+                بالا
+            </button>
+
+            <button data-layout="compact">
+                جمع‌وجور
+            </button>
+
+            <button data-layout="center">
+                مرکزی
+            </button>
+
+        </div>
+
+
+        <label class="check-row">
+
+            <input
+                id="showCombo"
+                type="checkbox"
+                checked
+            >
+
+            نمایش کامبو
+
+        </label>
+
+
+        <button id="closeSettings" class="close-settings">
+            بستن
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= RESULT ================= -->
+
+<div id="resultScreen" class="screen hidden">
+
+    <div class="result-box">
+
+        <div id="winnerText">
+            PLAYER 1 WINS
+        </div>
+
+        <button id="rematchButton">
+            مبارزه دوباره
+        </button>
+
+        <button id="menuButton">
+            منوی اصلی
+        </button>
+
+    </div>
+
+</div>
+
+
+<script type="module" src="app.js"></script>
+
+</body>
+</html>
