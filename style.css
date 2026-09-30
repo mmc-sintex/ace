@@ -1,0 +1,800 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    image-rendering: pixelated;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: #111;
+    color: white;
+    font-family: monospace;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+}
+
+
+/* ================= GENERAL ================= */
+
+.screen {
+    width: 100vw;
+    height: 100vh;
+    min-height: 500px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* ================= MENU ================= */
+
+#menu {
+    background:
+        linear-gradient(
+            #15152e 0%,
+            #24245a 50%,
+            #111122 100%
+        );
+
+    overflow-y: auto;
+    padding: 30px 15px;
+}
+
+
+/* PIXEL STARS */
+
+#menu::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        radial-gradient(
+            white 1px,
+            transparent 1px
+        );
+
+    background-size: 35px 35px;
+
+    opacity: .15;
+
+    pointer-events: none;
+}
+
+
+/* TITLE */
+
+.title {
+    position: relative;
+
+    font-size: clamp(45px, 9vw, 90px);
+
+    line-height: .8;
+
+    text-align: center;
+
+    font-weight: 900;
+
+    letter-spacing: 4px;
+
+    color: #fff;
+
+    text-shadow:
+        6px 6px 0 #000,
+        8px 8px 0 #ff315b;
+
+    margin-bottom: 35px;
+
+    transform: scaleY(1.05);
+}
+
+
+/* MENU BOX */
+
+.pixel-box {
+    position: relative;
+
+    width: min(700px, 94vw);
+
+    background: #1b1b32;
+
+    border: 5px solid #fff;
+
+    box-shadow:
+        8px 8px 0 #000,
+        inset 0 0 0 4px #4b4b69;
+
+    padding: 25px;
+
+    z-index: 2;
+}
+
+.pixel-box h2 {
+    font-size: 18px;
+
+    margin: 12px 0;
+
+    text-align: center;
+
+    color: #ffe56b;
+
+    text-shadow: 2px 2px #000;
+}
+
+
+/* CHOICES */
+
+.choice-row {
+    display: flex;
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    margin-bottom: 20px;
+}
+
+button {
+    font-family: monospace;
+
+    cursor: pointer;
+
+    border: 4px solid #fff;
+
+    background: #30304d;
+
+    color: white;
+
+    padding: 13px 18px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    box-shadow:
+        4px 4px 0 #000;
+
+    transition: transform .08s;
+}
+
+button:hover {
+    background: #414166;
+}
+
+button:active {
+    transform: translate(4px, 4px);
+
+    box-shadow:
+        0 0 0 #000;
+}
+
+button.active {
+    background: #e63d62;
+
+    color: white;
+
+    border-color: #ffe56b;
+
+    box-shadow:
+        4px 4px 0 #000;
+}
+
+
+/* DIFFICULTY */
+
+.difficulty-line {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 10px;
+}
+
+#difficulty {
+    flex: 1;
+
+    accent-color: #ff315b;
+}
+
+#difficultyValue {
+    width: 60px;
+
+    background: #000;
+
+    border: 3px solid white;
+
+    padding: 7px;
+
+    text-align: center;
+
+    font-size: 20px;
+
+    color: #ffe56b;
+}
+
+.difficulty-text {
+    text-align: center;
+
+    font-size: 12px;
+
+    color: #aaa;
+
+    margin-bottom: 15px;
+}
+
+
+/* START */
+
+.start-button {
+    display: block;
+
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 18px;
+
+    font-size: 22px;
+
+    background: #39c96b;
+
+    color: #061006;
+
+    border-color: white;
+
+    box-shadow:
+        6px 6px 0 #000;
+}
+
+.start-button:hover {
+    background: #53e681;
+}
+
+
+/* FOOTER */
+
+.footer {
+    position: relative;
+
+    margin-top: 25px;
+
+    font-size: 12px;
+
+    color: #888;
+
+    z-index: 2;
+}
+
+
+/* ================= GAME ================= */
+
+#fight {
+    background: #000;
+}
+
+#game {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    max-width: 1600px;
+
+    overflow: hidden;
+
+    background: #62c9ff;
+}
+
+
+/* SKY */
+
+.sky {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            #3e7edb 0%,
+            #75d7ff 60%,
+            #c9f4ff 100%
+        );
+}
+
+
+/* SUN */
+
+.sky::before {
+    content: "";
+
+    position: absolute;
+
+    width: 90px;
+    height: 90px;
+
+    background: #ffe66d;
+
+    border: 6px solid #fff0a8;
+
+    border-radius: 50%;
+
+    top: 12%;
+    right: 15%;
+
+    box-shadow:
+        0 0 0 8px #f7c94b;
+}
+
+
+/* MOUNTAINS */
+
+.mountains {
+    position: absolute;
+
+    bottom: 23%;
+
+    left: 0;
+
+    width: 100%;
+    height: 30%;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            transparent 35%,
+            #3d477d 36%,
+            #3d477d 60%,
+            transparent 61%
+        ),
+
+        linear-gradient(
+            45deg,
+            transparent 40%,
+            #555f91 41%,
+            #555f91 70%,
+            transparent 71%
+        );
+
+    background-size:
+        450px 220px,
+        600px 260px;
+
+    background-position:
+        0 0,
+        180px 20px;
+}
+
+
+/* GROUND */
+
+.ground {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 25%;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            #633c27 0px,
+            #633c27 12px,
+            #744a2d 12px,
+            #744a2d 24px
+        );
+
+    border-top: 8px solid #271a13;
+}
+
+.ground-line {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 10px;
+
+    background: #9a6538;
+}
+
+
+/* ================= FIGHT UI ================= */
+
+.fight-ui {
+    position: absolute;
+
+    top: 25px;
+
+    left: 3%;
+    right: 3%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    z-index: 20;
+}
+
+.player-ui {
+    width: 40%;
+}
+
+.player-ui.player2-ui {
+    direction: ltr;
+}
+
+.name {
+    font-size: 15px;
+
+    font-weight: bold;
+
+    margin-bottom: 5px;
+
+    text-shadow: 3px 3px #000;
+}
+
+.health-frame {
+    width: 100%;
+
+    height: 25px;
+
+    border: 4px solid #fff;
+
+    background: #222;
+
+    box-shadow:
+        4px 4px 0 #000;
+}
+
+.health-bar {
+    width: 100%;
+
+    height: 100%;
+
+    background: #42e36b;
+
+    transition:
+        width .12s linear;
+}
+
+.timer {
+    width: 70px;
+
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #222;
+
+    border: 5px solid white;
+
+    box-shadow:
+        5px 5px 0 #000;
+
+    font-size: 30px;
+
+    font-weight: bold;
+
+    color: #ffe66d;
+}
+
+
+/* ================= PIXEL FIGHTERS ================= */
+
+.fighter {
+    position: absolute;
+
+    width: 70px;
+    height: 125px;
+
+    bottom: 25%;
+
+    z-index: 10;
+
+    transform-origin: bottom center;
+}
+
+.fighter1 {
+    left: 25%;
+}
+
+.fighter2 {
+    left: 70%;
+}
+
+
+/* HEAD */
+
+.head {
+    position: absolute;
+
+    width: 34px;
+    height: 34px;
+
+    left: 18px;
+    top: 0;
+
+    background: #f0b27a;
+
+    border: 4px solid #171717;
+
+    box-shadow:
+        inset -7px 0 0 #d88f5e;
+}
+
+
+/* BODY */
+
+.body {
+    position: absolute;
+
+    width: 38px;
+    height: 55px;
+
+    left: 16px;
+    top: 32px;
+
+    background: #d73555;
+
+    border: 4px solid #171717;
+
+    box-shadow:
+        inset -7px 0 0 #9c263d;
+}
+
+
+/* ARMS */
+
+.arm {
+    position: absolute;
+
+    width: 15px;
+    height: 45px;
+
+    top: 38px;
+
+    background: #f0b27a;
+
+    border: 4px solid #171717;
+
+    transform-origin: top center;
+
+    transition: transform .1s;
+}
+
+.arm-back {
+    left: 4px;
+
+    transform: rotate(15deg);
+}
+
+.arm-front {
+    right: 4px;
+
+    transform: rotate(-15deg);
+}
+
+
+/* LEGS */
+
+.leg {
+    position: absolute;
+
+    width: 16px;
+    height: 45px;
+
+    top: 82px;
+
+    background: #263c91;
+
+    border: 4px solid #171717;
+
+    transform-origin: top center;
+}
+
+.leg-back {
+    left: 15px;
+
+    transform: rotate(8deg);
+}
+
+.leg-front {
+    right: 15px;
+
+    transform: rotate(-8deg);
+}
+
+
+/* PLAYER 2 */
+
+.fighter2 {
+    filter: hue-rotate(130deg);
+}
+
+
+/* ================= ANIMATIONS ================= */
+
+.fighter.punching .arm-front {
+    transform:
+        rotate(90deg)
+        translateX(10px);
+}
+
+.fighter.kicking .leg-front {
+    transform:
+        rotate(75deg)
+        translateY(-8px);
+}
+
+.fighter.jumping {
+    bottom: calc(25% + 150px);
+}
+
+.fighter.blocking {
+    transform: scaleX(.85);
+}
+
+.fighter.hit {
+    animation: hitShake .12s linear 3;
+}
+
+@keyframes hitShake {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(8px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
+/* ================= MESSAGE ================= */
+
+.fight-message {
+    position: absolute;
+
+    left: 50%;
+    top: 42%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1.2);
+
+    font-size: clamp(35px, 8vw, 80px);
+
+    font-weight: 900;
+
+    color: #ffe66d;
+
+    text-shadow:
+        6px 6px #000,
+        10px 10px #e53e62;
+
+    z-index: 30;
+
+    pointer-events: none;
+}
+
+
+/* ================= TOUCH ================= */
+
+.touch-controls {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 20px;
+
+    height: 150px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: end;
+
+    padding: 0 20px;
+
+    z-index: 50;
+
+    pointer-events: none;
+}
+
+.touch-controls button {
+    pointer-events: auto;
+
+    width: 65px;
+    height: 65px;
+
+    padding: 0;
+
+    border-radius: 8px;
+
+    background: rgba(30,30,40,.75);
+
+    font-size: 22px;
+}
+
+.movement-buttons,
+.attack-buttons {
+    display: flex;
+
+    gap: 10px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .pixel-box {
+        padding: 15px;
+    }
+
+    .title {
+        margin-bottom: 20px;
+    }
+
+    .fighter {
+        transform: scale(.9);
+    }
+
+    .fight-ui {
+        top: 12px;
+    }
+
+    .health-frame {
+        height: 19px;
+    }
+
+    .timer {
+        width: 50px;
+        height: 50px;
+
+        font-size: 22px;
+    }
+
+    .name {
+        font-size: 11px;
+    }
+
+    button {
+        font-size: 13px;
+        padding: 11px;
+    }
+}
